@@ -1,0 +1,35 @@
+.bs-table {
+margin: 0;
+}
+
+.bs-table thead tr th {
+color: #fff;
+background-color: #999;
+}
+.bs-table .bs-price {
+text-align: right;
+}
+
+.bs-table .bs-center {
+text-align: center;
+}
+.bs-product-card {
+min-height: 290px; text-align: center; position: relative;
+}
+
+.bs-product-card img { height: 90px; margin-top: 20px;
+}
+
+.bs-product-card .btn-success { position: absolute;
+bottom: 15px;
+width: calc(100% - 30px);
+}
+
+.bs-product-card h4 { text-align: left;
+}
+
+.bs-product-card .form-group { text-align: left;
+}
+
+.bs-product-card .form-group strong { font-size: 16px;
+}
