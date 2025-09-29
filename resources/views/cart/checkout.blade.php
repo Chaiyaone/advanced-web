@@ -22,7 +22,7 @@
                 </thead>
                 <tbody>
                     <?php $sum_price = 0;
-$sum_qty = 0; ?>
+                    $sum_qty = 0; ?>
                     @foreach($cart_items as $c)
                         <tr>
                             <td><img src="{{ asset($c['image_url']) }}" width="32"></td>
@@ -69,17 +69,25 @@ $sum_qty = 0; ?>
     </div>
     <a href="{{ URL::to('cart/view') }}" class="btn btn-default">ย้อนกลับ </a>
     <div class="pull-right">
-        <a href="{{ URL::to('cart/complete') }}" class="btn btn-warning">พิมพ์ใบสั่งซื้อ</a>
-        <a href="javascript:complete()" class="btn btn-primary"><i class="fa fa-check"></i>จบการขาย</a>
+            <a href="{{ URL::to('cart/complete') }}" class="btn btn-warning">พิมพ์ใบสั่งซื้อ</a>
+            <button type="button" class="btn btn-primary" onclick="complete()"><i class="fa fa-check"></i>จบการขาย</button>
     </div>
-    
-    <script type="text/javascript"> function complete() {
-            window.open(
-                "{{ URL::to('cart/complete') }}?cust_name=" + $('#cust_name').val() + '&cust_email='
-                + $('#cust_email').val(), "_blank",
-            );
-            window.location.href = "{{ URL::to('cart/finish') }}";
-        }
-    </script>
+        <form id="finishForm" method="POST" action="{{ route('cart.finish') }}" style="display:none;">
+            @csrf
+            <input type="hidden" name="cust_name" id="finish_cust_name">
+            <input type="hidden" name="cust_email" id="finish_cust_email">
+        </form>
+        <script type="text/javascript">
+            function complete() {
+                window.open(
+                    "{{ URL::to('cart/complete') }}?cust_name=" + $('#cust_name').val() + '&cust_email=' + $('#cust_email').val(), "_blank"
+                );
+                // set hidden form values
+                document.getElementById('finish_cust_name').value = $('#cust_name').val();
+                document.getElementById('finish_cust_email').value = $('#cust_email').val();
+                // submit POST form
+                document.getElementById('finishForm').submit();
+            }
+        </script>
 </div>
 @stop
