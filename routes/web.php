@@ -2,6 +2,7 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,4 +45,7 @@ Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout']);
 
 Route::get('/cart/checkout', [CartController::class, 'checkout']);
 Route::get('/cart/complete', [CartController::class, 'complete']);
-Route::get('/cart/finish', [CartController::class, 'finish_order']);
+Route::post('/cart/finish', [CartController::class, 'finish_order'])->name('cart.finish');
+
+Route::get('/orders', [OrderController::class, 'index']);
+Route::get('/orders/{order}', [OrderController::class, 'edit'])->name('orders.edit');
