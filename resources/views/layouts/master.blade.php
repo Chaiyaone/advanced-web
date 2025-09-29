@@ -40,7 +40,8 @@
                     <li><a href="{{ URL::to('home') }}">หน้าแรก</a></li>@guest
                     @else
                         <li><a href="{{ URL::to('product') }}">ข้อมูลสินค้า </a></li>
-                    <li><a href="{{ URL::to('category') }}">ข้อมูลประเภทสินค้า</a></li>@endguest
+                    <li><a href="{{ URL::to('category') }}">ข้อมูลประเภทสินค้า</a></li>
+                    <li><a href="{{ URL::to('users') }}">ข้อมูลผู้ใช้</a></li>@endguest
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
     <li>
