@@ -42,4 +42,38 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function isAdmin()
+    {
+        return $this->level === 'admin';
+    }
+
+    public function isEmployee()
+    {
+        return $this->level === 'employee';
+    }
+
+    public function isCustomer()
+    {
+        return $this->level === 'customer';
+    }
+
+    // Method สำหรับตรวจสอบว่า user มี role ที่กำหนดหรือไม่
+    public function hasRole($role)
+    {
+        return $this->level === $role;
+    }
+
+    // Method สำหรับดึงหน้า home ตาม role
+    public function getHomeRoute()
+    {
+        switch($this->level) {
+            case 'admin':
+            case 'employee':
+                return '/product';
+            case 'customer':
+                return '/home';
+            default:
+                return '/home';
+        }
+    }
 }
