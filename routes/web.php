@@ -44,4 +44,5 @@ Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout']);
 
 Route::get('/cart/checkout', [CartController::class, 'checkout']);
 Route::get('/cart/complete', [CartController::class, 'complete']);
-Route::get('/cart/finish', [CartController::class, 'finish_order']);
+// routes/web.php
+Route::post('/cart/finish', [CartController::class, 'finish_order'])->name('cart.finish');
