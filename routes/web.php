@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
@@ -42,7 +43,14 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout']);
 
+
+// Cart routes
 Route::get('/cart/checkout', [CartController::class, 'checkout']);
 Route::get('/cart/complete', [CartController::class, 'complete']);
-// routes/web.php
 Route::post('/cart/finish', [CartController::class, 'finish_order'])->name('cart.finish');
+
+// Order routes
+
+Route::get('/order', [OrderController::class, 'index'])->name('order.index');
+Route::get('/order/{id}', [OrderController::class, 'show'])->name('order.show');
+Route::post('/order/{id}/status', [OrderController::class, 'update'])->name('order.update');
