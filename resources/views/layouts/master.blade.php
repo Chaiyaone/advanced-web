@@ -22,6 +22,7 @@
 </head>
 
 <body>
+    <div class="container">
     <nav class="navbar navbar-default navbar-static-top">
 
         <div class="navbar-header">
@@ -46,7 +47,7 @@
                 @if(Auth::user()->level == 'employee')
                     <li><a href="{{ URL::to('product') }}" >ข้อมูลสินค้า</a></li>
                     <li><a href="{{ URL::to('category') }}" >ข้อมูลประเภทสินค้า</a></li>
-                    <li><a href="#" >ข้อมูลการสั่งซื้อสินค้า</a></li> //ยังไม่มีURLคำสั่งซื้อ
+                    <li><a href="{{ URL::to('orders') }}" >ข้อมูลการสั่งซื้อสินค้า</a></li>
                     <li><a href="#">{{ Auth::user()->name }} </a></li>
                     <li><a href="{{ route('logout') }}">ออกจากระบบ </a></li> 
                 @endif
@@ -68,7 +69,8 @@
             @endauth
         </div>
     </div>
-    </nav> @yield("content")
+    </nav> 
+    </div>@yield("content")
     
     <!-- js -->
     @if(session('msg'))
@@ -80,7 +82,7 @@
     @endif
 
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-    <div class="container">
+    {{-- <div class="container">
         <nav class="navbar navbar-default navbar-static-top">
 
             <div class="navbar-header">
@@ -114,7 +116,7 @@
 </ul>
             </div>
 
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script> --}}
     
 <!-- js -->
 
