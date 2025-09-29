@@ -80,6 +80,41 @@
     @endif
 
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <div class="container">
+        <nav class="navbar navbar-default navbar-static-top">
+
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">BikeShop</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li><a href="{{ URL::to('home') }}">หน้าแรก</a></li>@guest
+                    @else
+                        <li><a href="{{ URL::to('product') }}">ข้อมูลสินค้า </a></li>
+                    <li><a href="{{ URL::to('category') }}">ข้อมูลประเภทสินค้า</a></li>
+                    <li><a href="{{ URL::to('users') }}">ข้อมูลผู้ใช้</a></li>@endguest
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+    <li>
+        <a href="{{ URL::to('cart/view') }}">
+            <i class="fa fa-shopping-cart"></i> ตะกร้า
+            <span class="label label-danger">
+                {!! count(Session::get('cart_items', [])) !!}
+            </span>
+        </a>
+    </li>
+    @guest
+        <li><a href="{{ route('login') }}">ล็อกอิน</a></li>
+        <li><a href="{{ route('register') }}">ลงทะเบียน</a></li>
+    @else
+        <li><a href="#">{{ Auth::user()->name }} </a></li>
+        <li><a href="{{ route('logout') }}">ออกจากระบบ </a></li>
+    @endguest
+</ul>
+            </div>
+
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
     
 <!-- js -->
 
