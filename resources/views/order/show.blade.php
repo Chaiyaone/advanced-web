@@ -5,6 +5,10 @@
 @section('content')
 <div class="container">
     <h1><i class="fa fa-file-text"></i> รายละเอียดการสั่งซื้อสินค้า</h1>
+    <ul class="breadcrumb">
+        <li><a href="{{ URL::to('product') }}">หน้าแรก</a></li>
+        <li class="active">รายละเอียดการสั่งซื้อสินค้า </li>
+    </ul>
     
     <div class="panel panel-primary">
         <div class="panel-heading">

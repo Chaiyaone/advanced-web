@@ -81,7 +81,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Request::is('catalog*') ? 'active' : '' }}" href="{{ route('product.catalog') }}">
+                            <a class="nav-link {{ Request::is('catalog*') ? 'active' : '' }}" href="{{ route('product.index') }}">
                                 ข้อมูลสินค้า
                             </a>
                         </li>

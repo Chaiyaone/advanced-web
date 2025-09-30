@@ -3,6 +3,9 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,71 +53,57 @@ Route::get('/cart/checkout', [CartController::class, 'checkout']);
 Route::get('/cart/complete', [CartController::class, 'complete']);
 Route::post('/cart/finish', [CartController::class, 'finish_order'])->name('cart.finish');
 
-// Order routes
+
 
 Route::get('/order', [OrderController::class, 'index'])->name('order.index');
-Route::get('/order/{id}', [OrderController::class, 'show'])->name('order.show');
-Route::post('/order/{id}/status', [OrderController::class, 'update'])->name('order.update');
-Route::post('/order/search', [OrderController::class, 'search']);
-
-
 
 Route::middleware(['auth'])->group(function () {
-    
+
     // Home route - จะ redirect ตาม user level
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    
-    // === Routes สำหรับ Customer (ทุก level เข้าได้) ===
-    Route::get('/catalog', [ProductController::class, 'catalog'])->name('product.catalog');
-    
-    // === Routes สำหรับ Admin และ Employee ===
-    Route::middleware(['check.level:admin,employee'])->group(function () {
-        
-        // Product Management (CRUD)
-        Route::resource('product', ProductController::class);
-        
-        // Category Management (CRUD)
-        Route::resource('category', CategoryController::class);
-        
-        // Branch Management (CRUD) - ถ้ามี
-        Route::resource('branch', BranchController::class);
-    });
-    
-    // === Routes สำหรับ Employee (รวม Admin ด้วย) - จัดการ Orders ===
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+    // ถ้าเป็น employee หรือ admin ให้ไปที่หน้า /product
     Route::middleware(['check.level:employee,admin'])->group(function () {
-        
-        // Order Management
-        Route::prefix('orders')->name('orders.')->group(function () {
-            Route::get('/', [OrderController::class, 'index'])->name('index');
-            Route::get('/{id}', [OrderController::class, 'show'])->name('show');
-            Route::post('/{id}/status', [OrderController::class, 'updateStatus'])->name('updateStatus');
-            Route::patch('/{id}/status-ajax', [OrderController::class, 'updateStatusAjax'])->name('updateStatusAjax');
-        });
+        Route::get('/redirect-product', function () {
+            return redirect('/product');
+        })->name('redirect.product');
+
+        Route::resource('product', ProductController::class);
+        Route::resource('category', CategoryController::class);
     });
-    
-    // === Routes สำหรับ Admin เท่านั้น ===
+
+    // === Routes สำหรับ Admin เท่านั้น
     Route::middleware(['check.level:admin'])->group(function () {
-        
-        // User Management (CRUD)
-        Route::resource('users', UserController::class);
-        
-        // Additional admin routes if needed
-        Route::get('/dashboard/admin', function () {
-            return view('admin.dashboard');
-        })->name('admin.dashboard');
+
+
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
+        Route::post('/users/search', [UserController::class, 'search'])->name('users.search');
+
+        Route::get('/users/add', [UserController::class, 'edit'])->name('users.add');
+        Route::post('/users/add', [UserController::class, 'insert'])->name('users.insert');
+
+        Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+        Route::post('/users/update', [UserController::class, 'update'])->name('users.update');
+
+
+        Route::get('/users/remove/{id}', [UserController::class, 'remove'])->name('users.remove');
+
     });
-    
-    // === Routes สำหรับ Customer เท่านั้น ===
-    Route::middleware(['check.level:customer'])->group(function () {
         
-        // Customer specific routes
-        Route::get('/my-orders', [OrderController::class, 'myOrders'])->name('my.orders');
+    // === Routes สำหรับ Customer เท่านั้น ===
+    Route::middleware(['check.level:employee'])->group(function () {
+        Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+        Route::get('/order', [OrderController::class, 'index'])->name('order.index');
+        Route::get('/order/{id}', [OrderController::class, 'show'])->name('order.show');
+        Route::post('/order/{id}/status', [OrderController::class, 'update'])->name('order.update');
+        Route::post('/order/search', [OrderController::class, 'search']);
+        
+    });
+
+    Route::middleware(['check.level:customer'])->group(function () {
+
         Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
         Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
     });
 });
 
-// Fallback route
-Route::fallback(function () {
-    return view('errors.404');
-});

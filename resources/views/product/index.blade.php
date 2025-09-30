@@ -38,7 +38,7 @@
                             <td>{{ $p->name }}</td>
                             <td>{{ $p->category->name }}</td>
                             <td>{{ $p->stock_qty }}</td>
-                            <td>{{ $p->price }}</td>
+                            <td>{{ number_format($p->price,2) }}</td>
                             <td class="bs-center">
                                 <a href="{{ URL::to('product/edit/' . $p->id) }}" class="btn btn-info">
                                     <i class="fa fa-edit"></i> แก้ไข</a>
@@ -53,6 +53,7 @@
                     <th colspan="4">รวม</th>
                     <td>{{ number_format($products->sum('stock_qty'), 0) }}</td>
                     <td>{{ number_format($products->sum('price'), 2) }}</td>
+                    <td></td>
 
                 </tfoot>
                 </tbody>
