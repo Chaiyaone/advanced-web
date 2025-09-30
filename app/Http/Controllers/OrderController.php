@@ -48,7 +48,7 @@ class OrderController extends Controller
                     'quantity' => $item['qty'],
                     'total' => $item['price'] * $item['qty'],
                 ]);
-                
+
                 // ลดจำนวนสินค้าใน products
                 $product = \App\Models\Product::find($item['id']);
                 if ($product) {
@@ -87,6 +87,6 @@ class OrderController extends Controller
         $order = Order::findOrFail($id);
         $order->status = $request->input('status');
         $order->save();
-        return redirect()->route('orders.edit', $id);
+        return redirect('/orders')->with(['msg' => 'อัปเดตสถานะสำเร็จ', 'ok' => true]);
     }
 }
