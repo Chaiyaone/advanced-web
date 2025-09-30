@@ -49,3 +49,4 @@ Route::post('/cart/finish', [CartController::class, 'finish_order'])->name('cart
 
 Route::get('/orders', [OrderController::class, 'index']);
 Route::get('/orders/{order}', [OrderController::class, 'edit'])->name('orders.edit');
+Route::post('/orders/{order}', [OrderController::class, 'updateStatus'])->name('orders.edit');

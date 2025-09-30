@@ -1,72 +1,110 @@
 @extends('layouts.master')
-@section('title') BikeShop | รายละเอียดการสั่งซื้อสินค้า @endsection
+@section('title')
+    BikeShop | รายละเอียดการสั่งซื้อสินค้า
+@endsection
 
 @section('content')
-<div class="container">
-    <h3>รายละเอียดการสั่งซื้อสิ้นค้า</h3>
+    <div class="container">
+        <h3>รายละเอียดการสั่งซื้อสิ้นค้า</h3>
+        <div style="background:#f7f7f7; border-radius:6px; padding:10px 20px; margin-bottom:20p">
+            <a href="/orders" class="breadcrumb-link">แสดงการสั่งซื้อสินค้า</a>
+            <style>
+                .breadcrumb-link {
+                    color: #1976d2;
+                    text-decoration: none;
+                    font-weight: bold;
+                    transition: background 0.2s;
+                }
+                .breadcrumb-link:hover {
+                    background: #e3f2fd;
+                    text-decoration: underline;
+                }
+            </style>
+            <span style="color:#888;"> / </span>
+            <span style="color:#888;">แก้ไขสินค้า</span>
+        </div>
 
-    <table class="table table-bordered" style="width: 50%;">
-        <tbody>
-            <tr>
-                <th>เลขที่ใบสั่งซื้อ</th>
-                <td>{{ $order->order_number }}</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>ชื่อลูกค้า</th>
-                <td>{{ $order->customer_name ?? '???' }}</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>อีเมล์</th>
-                <td><a href="mailto:{{ $order->email }}">{{ $order->email }}</a></td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>วันที่สั่งซื้อสินค้า</th>
-                <td>{{ \Carbon\Carbon::parse($order->created_at)->format('Y-m-d') }}</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th>สถานะการชำระเงิน</th>
-                <td @if($order->status === 'ชำระเงินแล้ว') style="background-color:#9fff9f" @elseif($order->status === 'ยังไม่ชำระเงิน') style="background-color:#fdd0a2" @endif>
-                    {{ $order->status }}
-                </td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <table class="table table-bordered text-center">
-        <thead class="table-light">
-            <tr>
-                <th>ลำดับ</th>
-                <th>ชื่อสินค้า</th>
-                <th>ราคาต่อหน่วย</th>
-                <th>จำนวน</th>
-                <th>รวมเงิน</th>
-            </tr>
-        </thead>
-        <tbody>
-            @php $totalAmount = 0; @endphp
-            @foreach($orderItems as $index => $item)
-                @php
-                    $subtotal = $item->price * $item->quantity;
-                    $totalAmount += $subtotal;
-                @endphp
+        <table class="table table-bordered" style="width: 50%; table-layout:fixed;">
+            <colgroup>
+                <col style="width:33.33%">
+                <col style="width:33.33%">
+                <col style="width:33.33%">
+            </colgroup>
+            <tbody>
                 <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td class="text-start">{{ $item->product_name }}</td>
-                    <td>{{ number_format($item->price) }}</td>
-                    <td>{{ $item->quantity }}</td>
-                    <td>{{ number_format($subtotal) }}</td>
+                    <th>เลขที่ใบสั่งซื้อ</th>
+                    <td>{{ $order->order_number }}</td>
+                    <td></td>
                 </tr>
-            @endforeach
-            <tr>
-                <td colspan="4" class="text-end"><strong>รวมเงิน</strong></td>
-                <td><strong>{{ number_format($totalAmount) }} บาท</strong></td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+                <tr>
+                    <th>ชื่อลูกค้า</th>
+                    <td>{{ $order->customer_name ?? '???' }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>อีเมล์</th>
+                    <td><a href="mailto:{{ $order->email }}">{{ $order->email }}</a></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>วันที่สั่งซื้อสินค้า</th>
+                    <td>{{ \Carbon\Carbon::parse($order->created_at)->format('Y-m-d') }}</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>สถานะการชำระเงิน</th>
+                    <td
+                        @if ($order->status === 'ชำระเงินแล้ว') style="background-color:#9fff9f" 
+                    @elseif($order->status === 'ยังไม่ชำระเงิน') style="background-color:#fdd0a2" @endif>
+                        <form method="POST" action="{{ route('orders.edit', $order->id) }}" id="statusForm">
+                            @csrf
+                            <select name="status" class="form-control"
+                                style="width:100%; height:100%; min-width:0; min-height:0; display:block; background-color:inherit; box-sizing:border-box; border:none; outline:none;"
+                                onchange="document.getElementById('statusForm').submit();">
+                                <option value="ยังไม่ชำระเงิน" {{ $order->status == 'ยังไม่ชำระเงิน' ? 'selected' : '' }}>
+                                    ยังไม่ชำระเงิน</option>
+                                <option value="ชำระเงินแล้ว" {{ $order->status == 'ชำระเงินแล้ว' ? 'selected' : '' }}>
+                                    ชำระเงินแล้ว</option>
+                            </select>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-bordered text-center">
+            <thead class="table-light">
+                <tr>
+                    <th style=" overflow:auto; min-width:50px;">ลำดับ</th>
+                    <th style=" overflow:auto; min-width:400px;">ชื่อสินค้า</th>
+                    <th style=" overflow:auto; min-width:60px;">ราคาต่อหน่วย</th>
+                    <th style=" overflow:auto; min-width:40px;">จำนวน</th>
+                    <th style=" overflow:auto; min-width:40px;">รวมเงิน</th>
+                </tr>
+            </thead>
+            <tbody>
+                @php $totalAmount = 0; @endphp
+                @foreach ($orderItems as $index => $item)
+                    @php
+                        $subtotal = $item->price * $item->quantity;
+                        $totalAmount += $subtotal;
+                    @endphp
+                    <tr>
+                        <td>{{ $index + 1 }}</td>
+                        <td class="text-start">{{ $item->product_name }}</td>
+                        <td>{{ number_format($item->price) }}</td>
+                        <td>{{ $item->quantity }}</td>
+                        <td>{{ number_format($subtotal) }}</td>
+                    </tr>
+                @endforeach
+                <tr style="border:none;">
+                    <td style="border:none;"></td>
+                    <td style="border:none;"></td>
+                    <td style="border:none;"></td>
+                    <td style="border:none; text-align:left;"><strong>รวมเงิน</strong></td>
+                    <td style="border:none; text-align:right;"><strong>{{ number_format($totalAmount) }} บาท</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 @endsection
