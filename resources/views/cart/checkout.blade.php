@@ -72,7 +72,7 @@
             <a href="{{ URL::to('cart/complete') }}" class="btn btn-warning">พิมพ์ใบสั่งซื้อ</a>
             <button type="button" class="btn btn-primary" onclick="complete()"><i class="fa fa-check"></i>จบการขาย</button>
     </div>
-        <form id="finishForm" method="POST" action="{{ route('cart.finish') }}" style="display:none;">
+        <form id="finishForm" method="POST" action="{{ route('orders.finish') }}" style="display:none;">
             @csrf
             <input type="hidden" name="cust_name" id="finish_cust_name">
             <input type="hidden" name="cust_email" id="finish_cust_email">
