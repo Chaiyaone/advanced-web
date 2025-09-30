@@ -49,8 +49,6 @@ Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout']);
 Route::get('/cart/checkout', [CartController::class, 'checkout']);
 Route::get('/cart/complete', [CartController::class, 'complete']);
 
-Route::get('/cart/finish', [CartController::class, 'finish_order']);
-
 
 Route::get('/users', [App\Http\Controllers\UserController::class, 'index']);
 Route::post('/users/search', [App\Http\Controllers\UserController::class, 'search']);
@@ -59,7 +57,7 @@ Route::post('/users/update', [App\Http\Controllers\UserController::class, 'updat
 Route::get('/users/remove/{id}', [App\Http\Controllers\UserController::class, 'remove']);
 Route::post('/users/add', [App\Http\Controllers\UserController::class, 'insert']);
 
-Route::post('/cart/finish', [CartController::class, 'finish_order'])->name('cart.finish');
+Route::post('/orders/finish', [OrderController::class, 'finish_order'])->name('orders.finish');
 
 Route::get('/orders', [OrderController::class, 'index']);
 Route::get('/orders/{order}', [OrderController::class, 'edit'])->name('orders.edit');
