@@ -108,7 +108,7 @@ class CartController extends Controller
                 'order_date'    => now(),
             ]);
 
-            // 2) สร้าง Order_Detail จาก cart_items
+            // 2) สร้าง Order_Detail จาก cart_items และลดจำนวนสินค้าใน products
             foreach ($cart_items as $item) {
                 Order_Detail::create([
                     'order_id' => $order->id,
@@ -117,6 +117,12 @@ class CartController extends Controller
                     'quantity' => $item['qty'],
                     'total' => $item['price'] * $item['qty'],
                 ]);
+                // ลดจำนวนสินค้าใน products
+                $product = \App\Models\Product::find($item['id']);
+                if ($product) {
+                    $product->stock_qty = max(0, $product->stock_qty - $item['qty']);
+                    $product->save();
+                }
             }
 
             DB::commit();

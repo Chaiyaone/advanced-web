@@ -7,12 +7,12 @@
     <table class="table table-bordered text-center align-middle">
         <thead class="table-light">
             <tr>
-                <th>OrderID</th>
-                <th>เลขที่ใบสั่งซื้อ</th>
-                <th>ชื่อลูกค้า</th>
-                <th>วันที่สั่งซื้อสินค้า</th>
-                <th>รายละเอียด</th>
-                <th>สถานะการชำระเงิน</th>
+                <th class="text-center">OrderID</th>
+                <th class="text-center">เลขที่ใบสั่งซื้อ</th>
+                <th class="text-center">ชื่อลูกค้า</th>
+                <th class="text-center">วันที่สั่งซื้อสินค้า</th>
+                <th class="text-center">รายละเอียด</th>
+                <th class="text-center">สถานะการชำระเงิน</th>
             </tr>
         </thead>
         <tbody>
@@ -23,9 +23,14 @@
                     <td>{{ $order->customer_name ?? '???' }}</td>
                     <td>{{ \Carbon\Carbon::parse($order->created_at)->format('Y-m-d') }}</td>
                     <td>
-                        <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-sm btn-outline-primary">
+                        <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-sm btn-outline-primary detail-link">
                             รายละเอียด
                         </a>
+                        <style>
+                            .detail-link:hover {
+                                text-decoration: underline;
+                            }
+                        </style>
                     </td>
                     <td 
                         @if($order->status === 'ชำระเงินแล้ว') style="background-color:#9fff9f" 
