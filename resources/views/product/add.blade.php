@@ -46,8 +46,17 @@
                     </tr>
 
                     <tr>
+                        <td>{{ Form::label('branch_id', 'สาขา') }}</td>
+                        <td>{{ Form::select(
+                                    'branch_id',
+                                    $branches,
+                                    Request::old('branch_id'),
+                                    ['class' => 'form-control']
+                                ) }}</td>
+
+                    <tr>
                         <td>{{ Form::label('stock_qty', 'คงเหลือ') }}</td>
-                        <td>{{ Form::text('stock_qty', Request::old('stock_qty'), ['class' => 'form- control']) }}</td>
+                        <td>{{ Form::text('stock_qty', Request::old('stock_qty'), ['class' => 'form-control']) }}</td>
                     </tr>
 
                     <tr>

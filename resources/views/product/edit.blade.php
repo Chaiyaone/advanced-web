@@ -38,6 +38,12 @@
                     <td>{{ Form::select('category_id', $categories, Request::old('category_id'), ['class' => 'form-control']) }}
                     </td>
                 </tr>
+                
+                <tr>
+                    <td>{{ Form::label('branch_id', 'สาขา') }}</td>
+                    <td>{{ Form::select('branch_id', $branches, Request::old('branch_id'), ['class' => 'form-control']) }}
+                    </td>
+
                 <tr>
                     <td>{{ Form::label('stock_qty', 'คงเหลือ') }}</td>
                     <td>{{ Form::text('stock_qty', $product->stock_qty, ['class' => 'form-control']) }} </td>

@@ -11,5 +11,10 @@ class Product extends Model
     protected $table = 'product';
     public function category(){
         return $this->belongsTo('App\Models\Category');
+
+    }
+
+    public function branch(){
+        return $this->belongsTo('App\Models\Branch');
     }
 }
