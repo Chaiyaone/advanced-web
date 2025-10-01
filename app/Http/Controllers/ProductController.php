@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Branch;
 use Config, Validator;
 
 class ProductController extends Controller
@@ -25,14 +26,18 @@ class ProductController extends Controller
             return view('product/index', compact('products'));
     }
     public function edit($id = null) {
+        $branches = Branch::pluck('name', 'id')->prepend('เลือกรายการ', '');
         $categories = Category::pluck('name', 'id')->prepend('เลือกรายการ', '');
         if($id) {
             $product = Product::where('id', $id)->first(); return view('product/edit')
             ->with('product', $product)
-            ->with('categories', $categories);
+            ->with('categories', $categories)
+            ->with('branches', $branches);
         } else {
         return view('product/add')
-        ->with('categories', $categories);
+
+        ->with('categories', $categories)
+        ->with('branches', $branches);
         }
 }
     public function update(Request $request) {
@@ -41,6 +46,7 @@ class ProductController extends Controller
             'code' => $request->code,
             'name' => $request->name, //ทดลองฟิลด์เดียวก่อน
             'category_id' => $request->category_id,
+            'branch_id' => $request->branch_id,
             'stock_qty' => $request->stock_qty,
             'price' => $request->price,
         );
@@ -48,6 +54,7 @@ class ProductController extends Controller
             'code' => 'required', 
             'name' => 'required',
             'category_id' => 'required|numeric', 
+            'branch_id' => 'required|numeric',
             'price' => 'numeric',
             'stock_qty' => 'numeric',
         );
@@ -67,6 +74,7 @@ class ProductController extends Controller
         $product->code = $request->code;
         $product->name = $request->name;
         $product->category_id = $request->category_id;
+        $product->branch_id = $request->branch_id;
         $product->price = $request->price;
         $product->stock_qty = $request->stock_qty;
         if($request->hasFile('image'))
@@ -97,6 +105,7 @@ class ProductController extends Controller
             'code' => $request->code,
             'name' => $request->name, //ทดลองฟิลด์เดียวก่อน
             'category_id' => $request->category_id,
+            'branch_id' => $request->branch_id,
             'stock_qty' => $request->stock_qty,
             'price' => $request->price,
         );
@@ -104,6 +113,7 @@ class ProductController extends Controller
             'code' => 'required', 
             'name' => 'required',
             'category_id' => 'required|numeric', 
+            'branch_id' => 'required|numeric',
             'price' => 'numeric',
             'stock_qty' => 'numeric',
         );
@@ -122,6 +132,7 @@ class ProductController extends Controller
         $product->code = $request->code;
         $product->name = $request->name;
         $product->category_id = $request->category_id;
+        $product->branch_id = $request->branch_id;
         $product->stock_qty = $request->stock_qty;
         $product->price = $request->price;
         if($request->hasFile('image'))

@@ -24,6 +24,7 @@
                         <th>รหัส</th>
                         <th>ชื่อสินค้า </th>
                         <th>ประเภท</th>
+                        <th>สาขา</th>
                         <th>คงเหลือ</th>
                         <th>ราคาต่อหน่วย</th>
                         <th>การทํางาน</th>
@@ -37,6 +38,7 @@
                             <td>{{ $p->code }}</td>
                             <td>{{ $p->name }}</td>
                             <td>{{ $p->category->name }}</td>
+                            <td>{{ $p->branch->name }}</td>
                             <td>{{ $p->stock_qty }}</td>
                             <td>{{ $p->price }}</td>
                             <td class="bs-center">

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class OrdersDetailTable extends Migration
+class CreateOrdersDetailTable extends Migration
 {
     /**
      * Run the migrations.
@@ -25,7 +25,6 @@ class OrdersDetailTable extends Migration
             $table->decimal('total', 10, 2);
             $table->timestamps();
         });
-
     }
 
     /**
@@ -35,6 +34,6 @@ class OrdersDetailTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('orders_detail');
     }
 }

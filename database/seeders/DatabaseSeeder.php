@@ -8,8 +8,10 @@ class DatabaseSeeder extends Seeder
 {
 public function run()
 {
-// $this->call(UsersTableSeeder::class);
-$this->call(CategoryTableSeeder::class);
-$this->call(ProductTableSeeder::class);
+	// Ensure branch records exist before inserting products
+	$this->call(CategoryTableSeeder::class);
+	$this->call(BranchTableSeeder::class);
+	$this->call(ProductTableSeeder::class);
+
 }
 }
