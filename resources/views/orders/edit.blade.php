@@ -72,14 +72,14 @@
             </tbody>
         </table>
 
-        <table class="table table-bordered text-center">
-            <thead class="table-light">
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <th style=" overflow:auto; min-width:50px;">ลำดับ</th>
-                    <th style=" overflow:auto; min-width:400px;">ชื่อสินค้า</th>
-                    <th style=" overflow:auto; min-width:60px;">ราคาต่อหน่วย</th>
-                    <th style=" overflow:auto; min-width:40px;">จำนวน</th>
-                    <th style=" overflow:auto; min-width:40px;">รวมเงิน</th>
+                    <th style="text-align: left; width: 8%;">ลำดับ</th>
+                    <th style="text-align: left; width: 42%;">ชื่อสินค้า</th>
+                    <th style="text-align: left; width: 18%;">ราคาต่อหน่วย</th>
+                    <th style="text-align: left; width: 12%;">จำนวน</th>
+                    <th style="text-align: left; width: 20%;">รวมเงิน</th>
                 </tr>
             </thead>
             <tbody>
@@ -90,19 +90,16 @@
                         $totalAmount += $subtotal;
                     @endphp
                     <tr>
-                        <td>{{ $index + 1 }}</td>
-                        <td class="text-start">{{ $item->product_name }}</td>
-                        <td>{{ number_format($item->price) }}</td>
-                        <td>{{ $item->quantity }}</td>
-                        <td>{{ number_format($subtotal) }}</td>
+                        <td style="text-align: left;">{{ $index + 1 }}</td>
+                        <td style="text-align: left;">{{ $item->product_name }}</td>
+                        <td style="text-align: right;">{{ number_format($item->price) }}</td>
+                        <td style="text-align: right;">{{ $item->quantity }}</td>
+                        <td style="text-align: right;">{{ number_format($subtotal) }}</td>
                     </tr>
                 @endforeach
-                <tr style="border:none;">
-                    <td style="border:none;"></td>
-                    <td style="border:none;"></td>
-                    <td style="border:none;"></td>
-                    <td style="border:none; text-align:left;"><strong>รวมเงิน</strong></td>
-                    <td style="border:none; text-align:right;"><strong>{{ number_format($totalAmount) }} บาท</strong></td>
+                <tr>
+                    <td colspan="4" style="text-align: right; font-weight: bold;">รวมเงิน</td>
+                    <td style="text-align: right; font-weight: bold;">{{ number_format($totalAmount) }} บาท</td>
                 </tr>
             </tbody>
         </table>
