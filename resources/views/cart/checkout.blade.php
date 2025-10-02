@@ -8,14 +8,6 @@
         <li><a href="{{ URL::to('cart/view') }}">สินค้าในตะกร้า</a></li>
         <li class="active">ชําระเงิน</li>
     </div>
-    
-    {{-- แสดง Error Messages --}}
-    @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
-    
     <div class="row">
         <div class="col-md-6">
             <table class="table bs-table">
@@ -23,21 +15,14 @@
                     <tr>
                         <th></th>
                         <th>รหัส</th>
-                        <th>ชื่อสินค้า</th>
+                        <th>ชื่อสินค้า </th>
                         <th>จํานวน</th>
                         <th class="bs-price">ราคา</th>
                     </tr>
                 </thead>
                 <tbody>
-<<<<<<< HEAD
                     <?php $sum_price = 0;
                     $sum_qty = 0; ?>
-=======
-                    @php 
-                        $sum_price = 0;
-                        $sum_qty = 0;
-                    @endphp
->>>>>>> feature_order
                     @foreach($cart_items as $c)
                         <tr>
                             <td><img src="{{ asset($c['image_url']) }}" width="32"></td>
@@ -46,10 +31,8 @@
                             <td>{{ number_format($c['qty'], 0) }}</td>
                             <td class="bs-price">{{ number_format($c['price'], 0) }}</td>
                         </tr>
-                        @php
-                            $sum_price += ($c['price'] * $c['qty']);
-                            $sum_qty += $c['qty'];
-                        @endphp
+                        <?php    $sum_price += $c['price'] ?>
+                        <?php    $sum_qty += $c['qty'] ?>
                     @endforeach
                 </tbody>
                 <tfoot>
@@ -66,26 +49,22 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <div class="panel-title">
-                        <strong>ข้อมูลลูกค้า</strong>
+                        <strong>ข้อมูลลูกค้า </strong>
                     </div>
                 </div>
                 <div class="panel-body">
-                    <form id="customer-form">
-                        <div class="form-group">
-                            <label>ชื่อ-นามสกุล <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="cust_name" 
-                                   placeholder="ชื่อ-นามสกุล" required>
-                        </div>
-                        <div class="form-group">
-                            <label>อีเมล <span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" id="cust_email" 
-                                   placeholder="อีเมล์ของท่าน" required>
-                        </div>
-                    </form>
+                    <div class="form-group">
+                        <label>ชื่อ-นามสกุล</label>
+                        <input type="text" class="form-control" id="cust_name" placeholder="ชื่อ-นามสกุล">
+                    </div>
+
+                    <div class="form-group">
+                        <label>อีเมล</label>
+                        <input type="text" class="form-control" id="cust_email" placeholder="อีเมล์ของท่าน">
+                    </div>
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
 
     </div>
     <a href="{{ URL::to('cart/view') }}" class="btn btn-default">ย้อนกลับ </a>
@@ -110,52 +89,5 @@
                 document.getElementById('finishForm').submit();
             }
         </script>
-=======
-    </div>
-    
-    <a href="{{ URL::to('cart/view') }}" class="btn btn-default">ย้อนกลับ</a>
-    <div class="pull-right">
-        <a href="javascript:complete()" class="btn btn-primary">
-            <i class="fa fa-check"></i> จบการขาย
-        </a>
-    </div>
-    
-    {{-- Form สำหรับส่งข้อมูล --}}
-    <form id="finish-form" action="{{ URL::to('cart/finish') }}" method="POST" style="display: none;">
-        @csrf
-        <input type="hidden" name="cust_name" id="form_cust_name">
-        <input type="hidden" name="cust_email" id="form_cust_email">
-    </form>
->>>>>>> feature_order
 </div>
-
-<script type="text/javascript">
-function complete() {
-    // Validate
-    var custName = $('#cust_name').val();
-    var custEmail = $('#cust_email').val();
-    
-    if (!custName || !custEmail) {
-        alert('กรุณากรอกข้อมูลลูกค้าให้ครบถ้วน');
-        return;
-    }
-    
-    // Validate email format
-    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(custEmail)) {
-        alert('รูปแบบอีเมลไม่ถูกต้อง');
-        return;
-    }
-    
-    // ถามยืนยัน
-    if (confirm('ยืนยันการสั่งซื้อ?')) {
-        // ใส่ค่าลง form
-        $('#form_cust_name').val(custName);
-        $('#form_cust_email').val(custEmail);
-        
-        // Submit form
-        $('#finish-form').submit();
-    }
-}
-</script>
-@endsection
+@stop

@@ -15,11 +15,7 @@
         <li><a href="{{ URL::to('product') }}">หน้าแรก</a></li>
         <li class="active">แก้ไขประเภทสินค้า </li>
     </ul>
-    {!! Form::model($category, [
-    'route' => ['category.update', $category->id],
-    'method' => 'PUT',
-    'enctype' => 'multipart/form-data'
-]) !!}
+    {!! Form::model($category, array('action' => 'App\Http\Controllers\CategoryController@update', 'method' => 'POST', 'enctype' => 'multipart/form-data')) !!}
     <input type="hidden" name="id" value="{{ $category->id }}">
     <div class="panel panel-default">
         <div class="panel-heading">

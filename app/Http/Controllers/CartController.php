@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 use App\Models\Product;
+<<<<<<< HEAD
 
 use App\Models\Order_Detail;
 use App\Models\Order;
 use App\Models\Category;
 
+=======
+>>>>>>> parent of 08bd640 (Resolved merge conflicts and merged feature_order)
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
@@ -83,6 +85,7 @@ class CartController extends Controller
         ));
     }
     
+<<<<<<< HEAD
 
     public function finish_order(Request $request)
 {
@@ -158,4 +161,6 @@ class CartController extends Controller
     }
 }
 
+=======
+>>>>>>> parent of 08bd640 (Resolved merge conflicts and merged feature_order)
 }

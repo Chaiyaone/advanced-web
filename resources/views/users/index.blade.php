@@ -59,9 +59,5 @@
                 }
             });
         </script>
-<<<<<<< HEAD
             
-=======
-    
->>>>>>> feature_order
 @endsection

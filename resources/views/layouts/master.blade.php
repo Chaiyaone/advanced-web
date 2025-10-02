@@ -91,64 +91,11 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
 
-<<<<<<< HEAD
                     <li><a href="{{ URL::to('home') }}">หน้าแรก</a></li>@guest
                     @else
                         <li><a href="{{ URL::to('product') }}">ข้อมูลสินค้า </a></li>
                     <li><a href="{{ URL::to('category') }}">ข้อมูลประเภทสินค้า</a></li>
                     <li><a href="{{ URL::to('users') }}">ข้อมูลผู้ใช้</a></li>@endguest
-=======
-                    @auth
-                    <!-- Menu สำหรับ Admin -->
-                    @if(Auth::user()->level == 'admin')
-                        <li class="nav-item">
-                            <a class="nav-link {{ Request::is('product*') ? 'active' : '' }}" href="{{ route('product.index') }}">
-                                ข้อมูลสินค้า
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ Request::is('category*') ? 'active' : '' }}" href="{{ route('category.index') }}">
-                                ข้อมูลประเภทสินค้า
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ Request::is('users*') ? 'active' : '' }}" href="{{ route('users.index') }}">
-                                ข้อมูลผู้ใช้
-                            </a>
-                        </li>
-                    @endif
-                        @if(Auth::user()->level == 'employee')
-                        <li class="nav-item">
-                            <a class="nav-link {{ Request::is('product*') ? 'active' : '' }}" href="{{ route('product.index') }}">
-                                ข้อมูลสินค้า
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ Request::is('category*') ? 'active' : '' }}" href="{{ route('category.index') }}">
-                                ข้อมูลประเภทสินค้า
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ Request::is('orders*') ? 'active' : '' }}" href="{{ route('orders.index') }}">
-                                ข้อมูลการสั่งซื้อสินค้า
-                            </a>
-                        </li>
-                    @endif
-
-                    @if(Auth::user()->level == 'customer')
-                        <li class="nav-item">
-                            <a class="nav-link {{ Request::is('home') ? 'active' : '' }}" href="{{ url('/home') }}">
-                                หน้าแรก
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link {{ Request::is('catalog*') ? 'active' : '' }}" href="{{ route('product.index') }}">
-                                ข้อมูลสินค้า
-                            </a>
-                        </li>
-                    @endif
-                @endauth
->>>>>>> feature_order
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
     <li>

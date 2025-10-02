@@ -1,0 +1,34 @@
+[33mff056e6[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m WIP: save current changes
+[33m08bd640[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Resolved merge conflicts and merged feature_order
+[33mfd92c34[m[33m ([m[1;31morigin/feature_order[m[33m, [m[1;32mfeature_order[m[33m)[m update
+[33mc9a5ced[m Merge pull request #8 from KitArun/Orderlist
+[33m14e7ddb[m จัดหน้า orderList
+[33m4701d9c[m Merge pull request #7 from Chaiyaone/13-14-15
+[33m0a1e37a[m[33m ([m[1;31morigin/13-14-15[m[33m)[m 13-14-15
+[33m3c71baf[m[33m ([m[1;31morigin/13-14-15-branch[m[33m)[m Merge pull request #6 from KitArun/Orderlist
+[33me7b69cc[m แก้ไขให้เมื่อเปลี่ยนสถานะ จะกลับไปหน้า orders
+[33meccbdc9[m จัด controller
+[33m59cb6df[m Merge pull request #5 from KitArun/Orderlist
+[33m90e09d7[m Merge branch 'main' into Orderlist
+[33m956af51[m Middleware Lever User
+[33mef35703[m Controller,View,Web(API)
+[33m4410e27[m fix login form
+[33m23e95b1[m Merge pull request #4 from Jexd223/ViewLevelUser
+[33m6474b8a[m Merge branch 'main' into ViewLevelUser
+[33m49c2fdf[m Merge pull request #3 from ThanyatornSathiannet/Edit-Users
+[33m9621492[m Merge branch 'main' into Edit-Users
+[33m9522152[m Merge pull request #2 from KitArun/Orderlist
+[33mb20ed04[m UpdateViewLevelUser
+[33m97955d9[m Update Edit Users
+[33mfa92b13[m Add OrderController, view Order
+[33mc4df732[m User level middleware only
+[33m2c5d74b[m adding view and update status order
+[33mc8b2562[m Update Model Order and Detail
+[33m3aa644e[m Store data to order,detail
+[33mb464632[m[33m ([m[1;31morigin/make_migration[m[33m, [m[1;32mmake_migration[m[33m)[m fix relation migration and database
+[33ma5903a1[m Update Checkout,Cart
+[33m4df79ba[m Update migration and users level
+[33ma9d73bd[m Update migration and database
+[33m52e2062[m migrate Order,Detail Table and relation
+[33m03df720[m dupe code from workshop
+[33m85a66c2[m Initial commit

@@ -15,11 +15,7 @@
         <li><a href="{{ URL::to('product') }}">หน้าแรก</a></li>
         <li class="active">แก้ไขสินค้า </li>
     </ul>
-    {!! Form::model($product, [
-    'route' => ['product.update', $product->id],
-    'method' => 'PUT',
-    'enctype' => 'multipart/form-data'
-]) !!}
+    {!! Form::model($product, array('action' => 'App\Http\Controllers\ProductController@update', 'method' => 'POST', 'enctype' => 'multipart/form-data')) !!}
     <input type="hidden" name="id" value="{{ $product->id }}">
     <div class="panel panel-default">
         <div class="panel-heading">

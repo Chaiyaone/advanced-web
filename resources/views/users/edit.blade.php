@@ -19,11 +19,7 @@
 
 {!! Form::model($user, array('url' => 'users/update', 'method' => 'POST', 'enctype' => 'multipart/form-data')) !!}
 <input type="hidden" name="id" value="{{ $user->id }}">
-<<<<<<< HEAD
     
-=======
-
->>>>>>> feature_order
 
     <div class="panel panel-default">
         <div class="panel-heading">
