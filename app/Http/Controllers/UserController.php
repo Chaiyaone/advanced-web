@@ -29,6 +29,11 @@ class UserController extends Controller
 
 
     public function edit($id = null) {
+        if (auth()->id() == $id) {
+            return redirect()->route('users.index')
+                ->with('error', true)
+                ->with('msg', 'คุณไม่สามารถแก้ไขข้อมูลของตัวเองได้ในหน้านี้');
+        }
         $levels = [
             'customer' => 'customer',
             'admin' => 'admin',
@@ -50,6 +55,11 @@ class UserController extends Controller
 
     public function update(Request $request) {
         $id = $request->id;
+        if (auth()->id() == $id) {
+            return redirect()->route('users.index')
+                ->with('error', true)
+                ->with('msg', 'คุณไม่สามารถแก้ไขข้อมูลของตัวเองได้ในหน้านี้');
+        }
         $temp = array(
             'name' => $request->name, 
             'email' => $request->email,
@@ -132,6 +142,11 @@ class UserController extends Controller
 
 
     public function remove($id) {
+        if (auth()->id() == $id) {
+            return redirect()->route('users.index')
+                ->with('error', true)
+                ->with('msg', 'คุณไม่สามารถลบบัญชีของตัวเองได้');
+        }
         User::find($id)->delete();
         return redirect('users')
         ->with('ok', true)
