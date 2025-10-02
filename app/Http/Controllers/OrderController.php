@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
 
-
     public function finish_order(Request $request)
     {
         $cart_items = Session::get('cart_items');

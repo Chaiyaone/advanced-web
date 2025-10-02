@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-<<<<<<< HEAD
 
 
 use App\Models\Order_Detail;
 
-=======
->>>>>>> parent of 08bd640 (Resolved merge conflicts and merged feature_order)
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 

@@ -2,16 +2,18 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
-<<<<<<< HEAD
+
 use App\Http\Controllers\UserController;
 
 
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 
-=======
+
 use App\Http\Controllers\OrderController;
->>>>>>> parent of 08bd640 (Resolved merge conflicts and merged feature_order)
+
+
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -66,7 +68,6 @@ Route::get('/orders', [OrderController::class, 'index']);
 Route::get('/orders/{order}', [OrderController::class, 'edit'])->name('orders.edit');
 
 Route::post('/orders/{order}', [OrderController::class, 'updateStatus'])->name('orders.edit');
-<<<<<<< HEAD
 
 Route::post('/cart/finish', [CartController::class, 'finish_order'])->name('cart.finish');
 
@@ -123,6 +124,4 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
     });
 });
-=======
->>>>>>> parent of 08bd640 (Resolved merge conflicts and merged feature_order)
 

@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 use App\Models\Product;
-<<<<<<< HEAD
+
 
 use App\Models\Order_Detail;
 use App\Models\Order;
 use App\Models\Category;
 
-=======
->>>>>>> parent of 08bd640 (Resolved merge conflicts and merged feature_order)
+
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
@@ -85,82 +84,4 @@ class CartController extends Controller
         ));
     }
     
-<<<<<<< HEAD
-
-    public function finish_order(Request $request)
-{
-    // Validate input
-    $request->validate([
-        'cust_name' => 'required|string|max:255',
-        'cust_email' => 'required|email'
-    ]);
-    
-    $cart_items = Session::get('cart_items');
-    
-    if (!$cart_items || count($cart_items) == 0) {
-        return redirect('/cart/view')->with('error', 'ไม่มีสินค้าในตะกร้า');
-    }
-
-    DB::beginTransaction();
-    
-    try {
-        // สร้างเลขที่ใบสั่งซื้อแบบไม่ซ้ำ
-        $order_number = 'PO' . date('YmdHis') . rand(100, 999);
-        
-        // สร้าง Order
-        $order = Order::create([
-            'order_number' => $order_number,
-            'customer_name' => $request->input('cust_name'),
-            'email' => $request->input('cust_email'),
-            'order_date' => now(),
-            'status' => 'ยังไม่ชำระเงิน',
-        ]);
-
-        // วนลูปบันทึก OrderDetail และลดสต็อก
-        foreach ($cart_items as $item) {
-            // หา product จาก ID
-            $product = Product::find($item['id']);
-            
-            if (!$product) {
-                throw new \Exception('ไม่พบสินค้า: ' . $item['name']);
-            }
-            
-            // ตรวจสอบสต็อก
-            if ($product->stock_qty < $item['qty']) {
-                throw new \Exception(
-                    'สินค้า ' . $product->name . 
-                    ' มีไม่เพียงพอ (คงเหลือ: ' . $product->stock_qty . ')'
-                );
-            }
-            
-            // บันทึกรายละเอียดการสั่งซื้อ
-            Order_Detail::create([
-                'order_id' => $order->id,
-                'product_name' => $product->name,
-                'price' => $product->price,
-                'quantity' => $item['qty'],
-                'total' => $product->price * $item['qty'],
-            ]);
-            
-            // ลดจำนวนสินค้าในสต็อก
-            $product->decrement('stock_qty', $item['qty']);
-        }
-
-        DB::commit();
-        
-        // ล้าง Session
-        Session::forget('cart_items');
-        
-        return redirect('/home')
-            ->with('success', 'บันทึกใบสั่งซื้อเรียบร้อย เลขที่: ' . $order_number);
-        
-    } catch (\Exception $e) {
-        DB::rollBack();
-        return redirect('/cart/view')
-            ->with('error', 'เกิดข้อผิดพลาด: ' . $e->getMessage());
-    }
-}
-
-=======
->>>>>>> parent of 08bd640 (Resolved merge conflicts and merged feature_order)
 }
