@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 use App\Models\Product;
-<<<<<<< HEAD
-=======
+
 use App\Models\Order_Detail;
 use App\Models\Order;
 use App\Models\Category;
->>>>>>> feature_order
+
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -83,9 +82,8 @@ class CartController extends Controller
             'total_amount'
         ));
     }
-<<<<<<< HEAD
     
-=======
+
     public function finish_order(Request $request)
 {
     // Validate input
@@ -159,5 +157,5 @@ class CartController extends Controller
             ->with('error', 'เกิดข้อผิดพลาด: ' . $e->getMessage());
     }
 }
->>>>>>> feature_order
+
 }

@@ -3,16 +3,14 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CartController;
-<<<<<<< HEAD
-use App\Http\Controllers\OrderController;
-=======
 use App\Http\Controllers\UserController;
+
+
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
->>>>>>> feature_order
+
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\UserController;
 
 
 /*
@@ -58,15 +56,9 @@ Route::get('/logout', [App\Http\Controllers\HomeController::class, 'logout']);
 // Cart routes
 Route::get('/cart/checkout', [CartController::class, 'checkout']);
 Route::get('/cart/complete', [CartController::class, 'complete']);
-<<<<<<< HEAD
 
 
-Route::get('/users', [App\Http\Controllers\UserController::class, 'index']);
-Route::post('/users/search', [App\Http\Controllers\UserController::class, 'search']);
-Route::get('/users/edit/{id?}', [App\Http\Controllers\UserController::class, 'edit']);
-Route::post('/users/update', [App\Http\Controllers\UserController::class, 'update']);
-Route::get('/users/remove/{id}', [App\Http\Controllers\UserController::class, 'remove']);
-Route::post('/users/add', [App\Http\Controllers\UserController::class, 'insert']);
+
 
 Route::post('/orders/finish', [OrderController::class, 'finish_order'])->name('orders.finish');
 
@@ -74,7 +66,7 @@ Route::get('/orders', [OrderController::class, 'index']);
 Route::get('/orders/{order}', [OrderController::class, 'edit'])->name('orders.edit');
 
 Route::post('/orders/{order}', [OrderController::class, 'updateStatus'])->name('orders.edit');
-=======
+
 Route::post('/cart/finish', [CartController::class, 'finish_order'])->name('cart.finish');
 
 
@@ -130,5 +122,4 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
     });
 });
->>>>>>> feature_order
 

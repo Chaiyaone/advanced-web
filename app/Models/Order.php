@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Models;
-<<<<<<< HEAD
 
-=======
+
+
 use App\Models\Order_Detail;
->>>>>>> feature_order
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
